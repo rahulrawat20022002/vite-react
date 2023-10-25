@@ -1,11 +1,10 @@
 import "./App.css";
+import Footer from "./Component/Footer/Footer";
+import Header from "./Component/Header/Header";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  return (
-    <>
-      <h1 className="text-3xl font-bold underline bg-slate-600">Hello world!</h1>
-    </>
-  );
+  return <></>;
 }
 
 export default App;
