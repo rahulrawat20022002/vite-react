@@ -31,10 +31,10 @@ function App() {
 
       {todoarr.map((task, index) => (
         <div>
-          <li key={index}>
+          <div key={index}>
             {task}
             <button onClick={() => deleteTask(index)}>Delete</button>
-          </li>
+          </div>
         </div>
       ))}
     </>

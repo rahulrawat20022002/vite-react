@@ -4,12 +4,14 @@ import { useTodo } from "../Context";
 function TodoForm() {
   const [input, setinput] = useState("");
   const { addTodo } = useTodo();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!input) return;
     addTodo({ todo: input });
     setinput("");
   };
+
   return (
     <form className="flex" onSubmit={handleSubmit}>
       <input

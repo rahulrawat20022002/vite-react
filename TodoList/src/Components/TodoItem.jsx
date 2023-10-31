@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTodo } from "../Context";
 
 function TodoItem({ todo }) {
-  const { addTodo, updateTodo, toggleTodo, deleteTodo, todos } = useTodo();
+  const { updateTodo, toggleTodo, deleteTodo } = useTodo();
   const [todoMsg, setTodoMsg] = useState(todo.todo);
   const [isTodoEditable, setIsTodoEditable] = useState(false);
 
