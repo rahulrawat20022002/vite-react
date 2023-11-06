@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletTodo, updaTodo } from "../features/todo/TodoSlice";
 import UpdateTodo from "./UpdateTodo";
 function Todos() {
-  const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos);
 
   return (
@@ -43,7 +42,9 @@ function Todos() {
         ))}
       </ul> */}
       {todos.map((todo) => (
-        <UpdateTodo todo={todo} />
+        <>
+          <UpdateTodo todo={todo} />
+        </>
       ))}
     </>
   );
