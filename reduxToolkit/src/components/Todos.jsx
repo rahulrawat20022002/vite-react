@@ -42,9 +42,9 @@ function Todos() {
         ))}
       </ul> */}
       {todos.map((todo) => (
-        <>
+        <div key={todo.id}>
           <UpdateTodo todo={todo} />
-        </>
+        </div>
       ))}
     </>
   );

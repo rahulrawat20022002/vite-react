@@ -20,10 +20,7 @@ function UpdateTodo({ todo }) {
 
   return (
     <ul className="list-none">
-      <li
-        className="mt-4 flex gap-3 justify-between items-center bg-zinc-800 px-4 py-2 rounded text-white"
-        key={todo.id}
-      >
+      <li className="mt-4 flex gap-3 justify-between items-center bg-zinc-800 px-4 py-2 rounded text-white">
         {editable ? (
           <>
             {/* Save btn */}
