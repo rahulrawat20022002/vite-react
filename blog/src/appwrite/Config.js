@@ -2,13 +2,15 @@ import { Client, Databases, ID, Query } from "appwrite";
 import conf from "../conf/Conf";
 
 class Service {
-  client;
+  client = new Client();
   database;
+  bucket;
   constructor() {
-    this.client = new Client()
+    this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
     this.database = new Databases(this.client);
+    this.bucket = new Bucket(this.client);
   }
 
   async createPost({ slug, content, title, status, featuredImage, userId }) {
@@ -85,6 +87,31 @@ class Service {
     } catch (error) {
       throw error;
     }
+  }
+
+  async fileUpload(file) {
+    try {
+      return await this.bucket.createFile(
+        conf.appwriteBucketId,
+        ID.unique(),
+        file
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async fileDelete(file) {
+    try {
+      return await this.bucket.deleteFile(conf.appwriteBucketId, file);
+      return true;
+    } catch (error) {
+      throw error;
+      return false;
+    }
+  }
+  getfilePreview(fileId) {
+    return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
   }
 }
 
