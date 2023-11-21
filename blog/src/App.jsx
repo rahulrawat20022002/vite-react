@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import "./App.css";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
+import { Header, Footer } from "./components/index";
 import auth from "./appwrite/auth";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -12,7 +11,7 @@ function App() {
 
   useEffect(() => {
     auth
-      .getCurrnetUser()
+      .getCurrentUser()
       .then((user) => {
         if (user) {
           dispatch(login(user));

@@ -29,16 +29,16 @@ export class AuthService {
       const response = await this.account.createEmailSession(email, password);
       return response;
     } catch (error) {
-      throw error;
+      console.log("Appwrite serive :: login :: error", error);
     }
   }
 
-  async getCurrnetUser() {
+  async getCurrentUser() {
     try {
       const response = await this.account.get();
       return response;
     } catch (error) {
-      throw error;
+      console.log("Appwrite serive :: getCurrentUser :: error", error);
     }
     return null;
   }
@@ -48,7 +48,7 @@ export class AuthService {
       const response = await this.account.deleteSessions();
       return response;
     } catch (error) {
-      throw error;
+      console.log("Appwrite serive :: logout :: error", error);
     }
   }
 }
