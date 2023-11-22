@@ -19,7 +19,7 @@ function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
-    if (data) {
+    if (post) {
       const file = data.img[0] ? service.fileUpload(data.img[0]) : null;
       if (file) {
         const deletefile = await service.fileDelete(post.featuredImage);
@@ -35,6 +35,8 @@ function PostForm({ post }) {
     } else {
       const file = data.img[0] ? service.fileUpload(data.img[0]) : undefined;
       if (file) {
+        const fileId = file.$id;
+        data.featuredImage = fileId;
         const dbPost = await service.createPost({
           ...data,
           userId: userData.$id,
@@ -47,10 +49,12 @@ function PostForm({ post }) {
   };
 
   const slugTransform = useCallback((value) => {
-    return value
-      .toLowerCase()
-      .trim()
-      .replace(/^[a-zA-Z\d]+g/, "-");
+    if (value && typeof value === "string") {
+      return value
+        .toLowerCase()
+        .trim()
+        .replace(/^[a-zA-Z\d]+g/, "-");
+    }
 
     return "";
   });
@@ -81,7 +85,7 @@ function PostForm({ post }) {
           className="mb-4"
           {...register("slug", { required: true })}
           onInput={(e) =>
-            setValue("slug", slugTransform(e.target.value), {
+            setValue("slug", slugTransform(e.currentTarget.value), {
               shouldValidate: true,
             })
           }
