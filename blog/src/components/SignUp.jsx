@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 import { login } from "../store/authSlice";
-import { Input } from "./Input";
+import { Input, Button, Logo } from "./index";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-function SingnUp() {
+function SignUp() {
   const { register, handleSubmit } = useForm();
 
   const [error, setError] = useState("");
@@ -95,4 +95,4 @@ function SingnUp() {
   );
 }
 
-export default SingnUp;
+export default SignUp;

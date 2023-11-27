@@ -10,9 +10,9 @@ export class AuthService {
     this.account = new Account(this.client);
   }
 
-  async createAccount({ email, password, ID }) {
+  async createAccount({ email, password, name }) {
     try {
-      const response = await this.account.create(ID.unique(), email, password);
+      const response = await this.account.create(ID.unique(), email, password,name);
       if (response) {
         //call another function
         this.login(email, password);

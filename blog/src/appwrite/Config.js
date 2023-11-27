@@ -1,4 +1,4 @@
-import { Client, Databases, ID, Query } from "appwrite";
+import { Client, Databases, ID, Storage, Query } from "appwrite";
 import conf from "../conf/Conf";
 
 class Service {
@@ -10,7 +10,7 @@ class Service {
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
     this.database = new Databases(this.client);
-    this.bucket = new Bucket(this.client);
+    this.bucket = new Storage(this.client);
   }
 
   async createPost({ slug, content, title, status, featuredImage, userId }) {
@@ -117,3 +117,5 @@ class Service {
 
 const service = new Service();
 export default service;
+
+
