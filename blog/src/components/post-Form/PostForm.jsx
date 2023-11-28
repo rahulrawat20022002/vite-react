@@ -8,7 +8,7 @@
 //   const { handleSubmit, control, watch, register, setValue, getValues } =
 //     useForm({
 //       defaultValues: {
-//         title: post ? post.title : "content",
+//         title: post ? post.title : "",
 //         slug: post ? post.$id : "",
 //         content: post ? post.content : "",
 //         status: post ? post.status : "active",
@@ -138,14 +138,15 @@
 
 // export default PostForm;
 
-import React, { useCallback } from "react";
-import { useForm } from "react-hook-form";
-import { Button, Input, RTE, Select } from "../index";
+import React, { useCallback, useEffect } from "react";
 import appwriteService from "../../appwrite/Config";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { RTE, Select, Input, Button } from "../../components/index";
 
 export default function PostForm({ post }) {
+  
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
@@ -159,8 +160,11 @@ export default function PostForm({ post }) {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
 
+  // console.log(userData);
+
   const submit = async (data) => {
     if (post) {
+      console.log(post);
       const file = data.image[0]
         ? await appwriteService.fileUpload(data.image[0])
         : null;

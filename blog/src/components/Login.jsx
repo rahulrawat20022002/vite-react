@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Input, Logo } from "./index";
 import authService from "../appwrite/auth";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
-import { login as storeLogin } from "../store/authSlice";
+import { login } from "../store/authSlice";
 function Login() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
@@ -12,17 +12,23 @@ function Login() {
   const [error, setError] = useState("");
 
   const login = async (data) => {
+    console.log(data);
     setError("");
     try {
       const session = await authService.login(data);
       if (session) {
         const userData = await authService.getCurrentUser();
+
         if (userData) {
-          dispatch(storeLogin(userData));
+          dispatch(login(userData));
+          console.log(userData);
           navigate("/");
         }
+        //   const getData = useSelector((state) => state.auth.userData);
+        //   console.log(getData);
       }
     } catch (error) {
+      console.log("Apprwirte::error occurred", error);
       setError(error);
     }
   };
